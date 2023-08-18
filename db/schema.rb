@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_18_190323) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_18_190507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_18_190323) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_blogs_on_name", unique: true, where: "(((state)::text <> 'finished'::text) AND (created_at > '2018-09-01 00:00:00'::timestamp without time zone))"
+    t.index ["name"], name: "index_blogs_on_name", unique: true, where: "(((state)::text <> ALL ((ARRAY['finished'::character varying, 'expired'::character varying])::text[])) AND (created_at > '2018-09-01 00:00:00'::timestamp without time zone))"
   end
 
 end
